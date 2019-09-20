@@ -22,9 +22,9 @@ module counter_up(
 	 assign tone = press ? 22'd000000 : 22'd125000;
 	 
 	 tone_generator clk_wiz_0_inst(
-				.clk(clk),
-				.counter(tone),
-				.sound(sound)
+			.clk(clk),
+			.counter(tone),
+			.sound(sound)
 	 );
 	 
 	 initial begin

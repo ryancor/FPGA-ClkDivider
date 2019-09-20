@@ -1,2 +1,2 @@
 # FPGA-ClkDivider
-![I/O Planning](Schematics/Schematic-IO.png "Description goes here")
+![I/O Planning](Schematics/Schematic-IO.png "Gate Connections")

@@ -3,7 +3,7 @@
 ///
 ////////////////////////
 module tone_generator(
-		clk, counter, sound
+	clk, counter, sound
     );
 	 
 	 input clk;

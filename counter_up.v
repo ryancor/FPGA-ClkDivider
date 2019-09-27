@@ -3,10 +3,10 @@
 ///
 ////////////////////////
 module counter_up(
-		input clk,
-		output reg [3:0] led,
-		input press,
-		output sound
+	input clk,
+	output reg [3:0] led,
+	input press,
+	output sound
     );
 	 
 	 // For LEDs
@@ -15,16 +15,35 @@ module counter_up(
 	 reg [3:0] next_led;
 	 
 	 // For Buzzer
-	 wire clk_400;
-	 wire valid;
-	 wire [21:0] tone;
+	 reg [21:0] tone; // if you wanted to assign tone to one press 
+							// you would wire it instead declare as reg
+	 wire [3:0] time_stamp;
+	 wire [3:0] b_leds = led;
+	 assign b_leds = time_stamp;
 	 
-	 assign tone = press ? 22'd000000 : 22'd125000;
+	 always @* begin
+		case(time_stamp) 
+			4'd0: tone = press ? 22'd000000 : 22'd125000;
+			4'd1: tone = press ? 22'd000000 : 22'd75000;
+			4'd2: tone = press ? 22'd000000 : 22'd50000;
+			4'd3: tone = press ? 22'd000000 : 22'd30000;
+			4'd4: tone = press ? 22'd000000 : 22'd125000;
+			4'd5: tone = press ? 22'd000000 : 22'd75000;
+			4'd6: tone = press ? 22'd000000 : 22'd50000;
+			4'd7: tone = press ? 22'd000000 : 22'd30000;
+			default: tone = press ? 22'd000000 : 22'd125000;
+		endcase
+	 end
 	 
 	 tone_generator clk_wiz_0_inst(
-			.clk(clk),
-			.counter(tone),
-			.sound(sound)
+		.clk(clk),
+		.counter(tone),
+		.sound(sound)
+	 );
+	 
+	 clock_divider clk_wiz_0_inst_time(
+		.clk(clk),
+		.counter(time_stamp)
 	 );
 	 
 	 initial begin
